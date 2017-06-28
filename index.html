@@ -1,1 +1,40 @@
-chhhhhhhh
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="application/javascript">
+//    var a = prompt("请输入第一个数字");
+//    var b = prompt("请输入第二个数字");
+//    var c = a + b ;
+//    alert(c);
+
+
+
+    var a = prompt("请输入一个三位数");
+    var a = Number(a);
+    var b = parseInt(a/100);
+    var bNum = Number(b);
+    alert("百位数字是：")
+    alert(b);
+    var s = parseInt((a-b*100)/10);
+    var sNum = Number(s);
+    alert("十位数字是：")
+    alert(s);
+    var g = parseInt(a-b*100-s*10);
+    var gNum = Number(g);
+    alert("个位数字是：")
+    alert(g);
+    alert(b + "" + s + "" + g );
+//    var bType = typeof  b;
+//    var sType = typeof  s;         // 判断是什么类型的  是数字还是字符串类型
+//    var gType = typeof  g;
+//    alert(bType);
+//    alert(sType);
+//    alert(gType);
+
+</script>
+</body>
+</html>
