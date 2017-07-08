@@ -1,1 +1,110 @@
- halo  nihao
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="600"></canvas>
+<script>
+    var v1 = 10, v2, a = 2, s = 0;
+    var upPipeX = 400;
+    var downPipeX = 400;
+    var downPipeHeight = 400;
+    var upPipeHeight = 200;
+    var niao1y = 250;
+    var downPipey = 400;
+    var count = 0;
+    var str = "game over";
+    var canvas = document.getElementById("canvas").getContext("2d");
+    var beijing = new Image();
+
+    var img = new Image();
+    img.src = "./images/pipe.png";
+
+    var img1 = new Image();
+    img1.src = "./images/zz.png";
+
+    var img2 = new Image();
+    img2.src = "./images/ground.png";
+
+
+
+
+    var niao1 = new Image();
+    var i = 0;
+    var imgSrcArr = ["./images/0.gif", "./images/1.gif", "./images/2.gif"];
+    var timer = setInterval(function () {
+        canvas.clearRect(0, 0, 400, 600);
+        beijing.src = "./images/bg.png";                                 //背景
+        canvas.drawImage(beijing, 0, 0, 400, 600);
+
+        // 鸟
+        i++;
+        i = i % 3;
+        niao1.src = imgSrcArr[i];
+        canvas.drawImage(niao1, 150, niao1y, 40, 40);
+
+//        upPipex = upPipex - 5;
+//        if (upPipex < -100) {
+//            upPipex = 400;
+//        }
+
+        v2 = v1 + a;
+        s = (v1 + v2) / 2;
+        niao1y += s;                              //鸟下坠的速度
+        upPipeX = upPipeX - 5 +count;
+        downPipeX = downPipeX - 5 + count;
+
+
+        if (upPipeX < -100) {
+            upPipeX = 400;
+            downPipeX = 400;
+            upPipeHeight = 100 + 200 * Math.random();  // 随机产生管子
+            downPipey = upPipeHeight + 200;
+            downPipeHeight = 700 - downPipey;
+        }
+
+        canvas.drawImage(img, 150, 500, 150, 800, upPipeX, 0, 100, upPipeHeight);
+        canvas.drawImage(img1, 0, 0, 150, 800, downPipeX, downPipey, 100, downPipeHeight);         // 判断鸟怎么死
+        canvas.drawImage(img2, 0, 550, 400, 200);
+        if ((niao1y + 40 > 550 || niao1y < 0 ) || ((140+40)>downPipeX)&&(niao1y + 30 >downPipey )&&(140<downPipeX+50)||((180)>upPipeX )&&(niao1y < upPipeHeight)&&(140<upPipeX+120))
+        {
+            clearInterval(timer);
+            canvas.fillStyle = "rgb(255,255,255)";
+            canvas.font = "30px Accent";              //出现game over
+            canvas.fillText(str, 200, 300);
+            canvas.fillText("get out" ,100,200);
+
+
+
+        }
+        if ( 100 == upPipeX ){
+             count = count + 1;
+        }
+        canvas.fillStyle = "rgb(255,255,255)";//   计数
+        canvas.font ="30px Accent";
+        canvas.fillText( count,150,250);
+
+
+    },80);
+
+
+
+
+    window.onkeydown = function (event) {
+//        console.log("sdaf");
+        var e = event || window.event;           //按空格跳起来
+        if (e.keyCode == 32) {
+            niao1y -= 80;
+
+        }
+    }
+
+//    window
+
+</script>
+
+
+</body>
+</html>
